@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PG Details</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 25px;
+      text-align: center;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+    .gallery {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+    }
+    .gallery img {
+      width: 30%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .details {
+      background-color: #ffffff;
+      margin: 20px;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .details p {
+      font-size: 1.1rem;
+      margin: 12px 0;
+      color: #444;
+    }
+    .reviews-section {
+      margin: 20px;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .reviews-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .review-card {
+      background-color: #ecf0f1;
+      width: 260px;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .review-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .review-name {
+      font-weight: bold;
+      color: #2c3e50;
+    }
+    .rating {
+      color: #f1c40f;
+    }
+    .review-text {
+      color: #555;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="pg-name">PG Paradise Residency</h1>
+  </header>
+
+  <div class="gallery">
+    <img src="images/pg1.jpg" alt="Interior" />
+    <img src="images/pg2.jpg" alt="Bedroom" />
+    <img src="images/pg3.jpg" alt="Outside View" />
+  </div>
+
+  <div class="details">
+    <p><strong>City:</strong> <span id="pg-city">Tokyo</span></p>
+    <p><strong>Price:</strong> ¥<span id="pg-price">45000</span> per month (All-inclusive)</p>
+    <p><strong>Facilities:</strong> <span id="pg-facilities">Wi-Fi, Laundry, AC Rooms, 24x7 Security, Study Desk, Common Lounge</span></p>
+    <p><strong>Available Rooms:</strong> 5 Single, 3 Double, 2 Triple Sharing</p>
+    <p><strong>Distance from Station:</strong> 500 meters</p>
+    <p><strong>Meals:</strong> 3-times vegetarian meals included</p>
+    <p><strong>Safety:</strong> CCTV monitored, biometric access</p>
+    <p><strong>Wi-Fi Speed:</strong> 100 Mbps</p>
+    <p><strong>Environment:</strong> Peaceful, Ideal for students and working professionals</p>
+  </div>
+
+  <div class="reviews-section">
+    <h2 style="text-align:center; color:#2c3e50;">User Reviews</h2>
+    <div class="reviews-container">
+      <div class="review-card">
+        <div class="review-header">
+          <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Ayumi">
+          <div>
+            <div class="review-name">Ayumi</div>
+            <div class="rating">★★★★☆</div>
+          </div>
+        </div>
+        <div class="review-text">Clean and peaceful environment. Great for focused studies. The food is also very hygienic.</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Riku">
+          <div>
+            <div class="review-name">Riku</div>
+            <div class="rating">★★★★★</div>
+          </div>
+        </div>
+        <div class="review-text">Located just a walk away from the metro station. Very friendly staff and affordable pricing.</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="Sakura">
+          <div>
+            <div class="review-name">Sakura</div>
+            <div class="rating">★★★★☆</div>
+          </div>
+        </div>
+        <div class="review-text">Loved the cozy interiors and fast internet. Roommates were respectful and kind. Safe for solo stay!</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <img src="https://randomuser.me/api/portraits/men/4.jpg" alt="Haruto">
+          <div>
+            <div class="review-name">Haruto</div>
+            <div class="rating">★★★★★</div>
+          </div>
+        </div>
+        <div class="review-text">Spacious and well-ventilated rooms. Daily cleaning and laundry make it extremely convenient.</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <img src="https://randomuser.me/api/portraits/women/5.jpg" alt="Aiko">
+          <div>
+            <div class="review-name">Aiko</div>
+            <div class="rating">★★★★☆</div>
+          </div>
+        </div>
+        <div class="review-text">Peaceful environment with a strong community vibe. I felt very safe and welcome here.</div>
+      </div>
+
+      <!-- <div class="review-card" id="user-review"></div> -->
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name");
+    const city = params.get("city");
+    const price = params.get("price");
+    const facilities = params.get("facilities");
+    const reviews = params.get("reviews");
+
+    if (name) document.getElementById("pg-name").textContent = name;
+    if (city) document.getElementById("pg-city").textContent = city;
+    if (price) document.getElementById("pg-price").textContent = price;
+    if (facilities) document.getElementById("pg-facilities").textContent = facilities;
+
+    if (reviews) {
+      document.getElementById("user-review").innerHTML = `
+        <div class="review-header">
+          <img src="https://randomuser.me/api/portraits/lego/1.jpg" alt="User">
+          <div>
+            <div class="review-name">You</div>
+            <div class="rating">★★★★☆</div>
+          </div>
+        </div>
+        <div class="review-text">${reviews}</div>`;
+    }
+  </script>
+</body>
+</html>

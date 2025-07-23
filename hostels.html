@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PG Listings</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> 
+  <style>
+    .carousel-img {
+      display: none;
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .carousel-img.active {
+      display: block;
+    }
+
+    .pg-card {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      max-width: 400px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+
+    .like-btn {
+      background: none;
+      border: none;
+      color: red;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .carousel-controls {
+      display: flex;
+      justify-content: space-between;
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 0 10px;
+    }
+
+    .carousel {
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="lo.png" alt="">
+      <span>PG Life</span>
+    </div>
+  </header>
+
+  <main class="pg-listings">
+    <h1 id="cityTitle">Loading PGs...</h1>
+    <div id="pgContainer" class="pg-container"></div>
+  </main>
+
+  <script>
+
+
+function bookPG(name, city, price) {
+    const url = `booking.html?name=${encodeURIComponent(name)}&city=${encodeURIComponent(city)}&price=${encodeURIComponent(price)}`;
+    window.location.href = url; // Use window.open(url, '_blank') for new tab
+  }
+
+
+  function viewPGDetails(name, city, price, cleanliness, facilities, staff, value) {
+      const url = `pg-details.html?name=${encodeURIComponent(name)}&city=${encodeURIComponent(city)}&price=${encodeURIComponent(price)}&cleanliness=${encodeURIComponent(cleanliness)}&facilities=${encodeURIComponent(facilities)}&staff=${encodeURIComponent(staff)}&value=${encodeURIComponent(value)}`;
+      window.location.href = url; // Redirect to the detail page
+    }
+
+
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const selectedCity = localStorage.getItem("selectedCity");
+      const cityTitle = document.getElementById("cityTitle");
+      const container = document.getElementById('pgContainer');
+  
+      if (!selectedCity) {
+        cityTitle.innerText = 'No city selected';
+        container.innerHTML = '<p>Please go back and select a city.</p>';
+        return;
+      }
+  
+      cityTitle.innerText = `PGs in ${selectedCity}`;
+  
+      fetch('http://localhost:5000/api/data')  // Make sure the port matches your backend
+        .then(res => res.json())
+        .then(data => {
+          // Check if the city exists in the PG data
+          const filtered = data.filter(pg => pg.City && pg.City.trim().toLowerCase() === selectedCity.trim().toLowerCase());
+  
+          if (filtered.length === 0) {
+            container.innerHTML = '<p>No PGs found in this city.</p>';
+            return;
+          }
+  
+          filtered.forEach(pg => {
+            const card = document.createElement('div');
+            card.className = 'pg-card';
+
+            card.innerHTML = `
+              <div class="carousel">
+                <img src="images/pg1.jpg" class="carousel-img active" alt="PG Image">
+                <img src="images/pg2.jpg" class="carousel-img active" alt="PG Image">
+                <img src="images/pg3.jpg" class="carousel-img active" alt="PG Image">
+                <div class="carousel-controls">
+                  <button class="prev">&#10094;</button>
+                  <button class="next">&#10095;</button>
+                </div>
+              </div>
+  
+              <h3>${pg["hostel.name"]}</h3>
+              <p><strong>City:</strong> ${pg["City"]}</p>
+              <p><strong>Distance:</strong> ${pg["Distance"]}</p>
+              <p><strong>Price From:</strong> ¥${pg["price.from"]}</p>
+              <p><strong>Cleanliness:</strong> ${pg["cleanliness"]}</p>
+              <p><strong>Facilities:</strong> ${pg["facilities"]}</p>
+              <p><strong>Security:</strong> ${pg["security"]}</p>
+              <p><strong>Staff:</strong> ${pg["staff"]}</p>
+              <p><strong>Value for Money:</strong> ${pg["valueformoney"]}</p>
+  
+              <div class="rating">
+                ${'★'.repeat(Math.round(pg["summary.score"] / 2))}${'☆'.repeat(5 - Math.round(pg["summary.score"] / 2))}
+                <span>(${pg["summary.score"]}/10)</span>
+              </div>
+
+
+
+              <button class="view-btn" onclick="viewPGDetails('${pg["hostel.name"].replaceAll('"', '')}', '${pg["City"]}', '${pg["price.from"]}', '${pg["cleanliness"]}', 'Water supply, Electricity, Wi-Fi', '${pg["staff"]}', '${pg["valueformoney"]}')"
+              style="background-color: #4CAF50; color: white; border: none; padding: 5px 10px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease;">
+              View Details
+              </button>
+  
+              <button class="like-btn"><i class="fa fa-heart"></i></button>
+
+
+            <button class="book-btn" onclick="bookPG('${pg["hostel.name"].replaceAll('"', '')}', '${pg["City"]}', '${pg["price.from"]}')">Book Now</button>
+
+
+
+            `;
+            container.appendChild(card);
+            
+          });
+
+        })
+        .catch(err => {
+          console.error("Error fetching PG data:", err);
+          container.innerHTML = '<p>Failed to load PG listings.</p>';
+        });
+    });
+  </script>
+  
+</body>
+</html>

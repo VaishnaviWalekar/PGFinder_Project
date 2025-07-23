@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PGs in {{ city }}</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background-color: #f7f7f7;
+    }
+    h1 {
+      color: #333;
+    }
+    .pg-card {
+      background: white;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .back-button {
+      display: inline-block;
+      margin-top: 2rem;
+      text-decoration: none;
+      background-color: #007bff;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>PGs in {{ city }}</h1>
+
+  {% if results %}
+    {% for pg in results %}
+      <div class="pg-card">
+        <h2>{{ pg['hostel.name'] }}</h2>
+        <p><strong>City:</strong> {{ pg['City'] }}</p>
+        <p><strong>Price From:</strong> ₹{{ pg['price.from'] }}</p>
+        <p><strong>Distance:</strong> {{ pg['Distance'] }}</p>
+        <p><strong>Cleanliness:</strong> {{ pg['cleanliness'] }}</p>
+        <p><strong>Security:</strong> {{ pg['security'] }}</p>
+        <p><strong>Staff:</strong> {{ pg['staff'] }}</p>
+        <p><strong>Value for Money:</strong> {{ pg['valueformoney'] }}</p>
+        <p><strong>Rating:</strong> {{ pg['summary.score'] }} ({{ pg['rating.band'] }})</p>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No PGs found in {{ city }}</p>
+  {% endif %}
+
+  <a href="/" class="back-button">Back to Home</a>
+</body>
+</html>
